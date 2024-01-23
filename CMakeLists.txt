@@ -120,7 +120,7 @@ set(mid_level_HEADERS
     ${smpt_root}/include/mid-level/smpt_ml_definitions.h
     ${smpt_root}/include/mid-level/smpt_ml_packet_utils.h
 )
-set(mid_LEVEL_SOURCES
+set(mid_level_SOURCES
     ${smpt_root}/src/mid-level/smpt_ml_packet_client.c
     ${smpt_root}/src/mid-level/smpt_ml_definitions_data_types.c
     ${smpt_root}/src/mid-level/smpt_ml_packet_server.c
@@ -154,7 +154,8 @@ set(dyscom_level_SOURCES
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/versioninfo.rc.cmake.in versioninfo.rc @ONLY)
 
-SET (BUILD_SHARED_LIBS TRUE)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(BUILD_SHARED_LIBS TRUE)
 include (GenerateExportHeader)
 add_library(
     ${SMPT_LIBRARY_NAME}
@@ -177,12 +178,11 @@ set_target_properties(${SMPT_LIBRARY_NAME} PROPERTIES
 	PUBLIC_HEADER "${all_HEADERS}"
 )
 
-#target_compile_definitions(${SMPT_LIBRARY_NAME} PUBLIC SMPT_EXPORTS)
-target_link_libraries(${SMPT_LIBRARY_NAME} PRIVATE)
+target_compile_definitions(${SMPT_LIBRARY_NAME} PUBLIC SMPT_DLL SMPT_EXPORTS)
+target_link_libraries(${SMPT_LIBRARY_NAME} PUBLIC)
 target_include_directories(${SMPT_LIBRARY_NAME}
 	PUBLIC  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-target_include_directories(${SMPT_LIBRARY_NAME}
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     PRIVATE
     ${general_HEADER_DIR}
     ${low_level_HEADER_DIR}
@@ -203,7 +203,7 @@ install(
 #target_include_directories(main PUBLIC)
 
 
-# Install CyclingController and .cmake files
+# Install ScienceModeProtocol and .cmake files
 install(EXPORT ${SMPT_LIBRARY_NAME}_Exports
   NAMESPACE ${PROJECT_NAME}::
   FILE ${PROJECT_NAME}Targets.cmake
