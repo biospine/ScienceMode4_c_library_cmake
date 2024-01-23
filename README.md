@@ -19,6 +19,14 @@ Use component '--component smpt-library' if there are other components (e.g., fr
 ```powershell
 cmake --install . --prefix="..\install"
 ```
+Then make sure CMake can find it.
+The following PATH method works using powershell on Windows platforms. There are [many](https://cmake.org/cmake/help/latest/command/find_package.html#config-mode-search-procedure) other way to let CMake find the package.
+```
+cd path_to_ScienceMode4_c_library_cmake
+$smpt_path = ";" + $PWD + "\install"
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
+[Environment]::SetEnvironmentVariable("PATH", $env:PATH + $smpt_path, [EnvironmentVariableTarget]::Machine)
+```
 
 ## How to use in another CMake project (i.e., link against)
 
