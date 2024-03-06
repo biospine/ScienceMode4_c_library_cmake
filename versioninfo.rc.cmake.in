@@ -22,7 +22,7 @@ BEGIN
     BEGIN
         BLOCK "040904E4"
         BEGIN
-            VALUE "CompanyName", "GCORE"
+            VALUE "CompanyName", "BioSpine"
             VALUE "FileDescription", "@PROJECT_NAME@ library - https://github.com/biospine"
             VALUE "FileVersion","@SMPT_VERSION_MAJOR@, @SMPT_VERSION_MINOR@, @SMPT_VERSION_PATCH@, 0"
             VALUE "InternalName", "@PROJECT_NAME@"
