@@ -1,5 +1,8 @@
 # ScienceMode4_c_library_cmake
 `ScienceMode4_c_library_cmake` is a wrapping around the [original C library of the ScienceMode 4 protocol](https://github.com/ScienceMode/ScienceMode4_c_library) so it may be build using CMake instead of qmake. This repository was created to avoid using Qt if a super project uses CMake. It is not the most elegant solution and likely has different compiler flags to the original project.
+
+In August of 2025 the original repo added CMake.
+
 ### Build and compile project
 ```powershell
 git clone --recurse-submodules https://github.com/biospine/ScienceMode4_c_library_cmake
