@@ -178,7 +178,11 @@ set_target_properties(${SMPT_LIBRARY_NAME} PROPERTIES
 	PUBLIC_HEADER "${all_HEADERS}"
 )
 
-target_compile_definitions(${SMPT_LIBRARY_NAME} PUBLIC SMPT_DLL SMPT_EXPORTS)
+# SMPT_DLL selects __declspec(dllexport/dllimport), which only MSVC/Windows
+# understands. Elsewhere shared-library symbols are exported by default.
+if(WIN32)
+  target_compile_definitions(${SMPT_LIBRARY_NAME} PUBLIC SMPT_DLL SMPT_EXPORTS)
+endif()
 target_link_libraries(${SMPT_LIBRARY_NAME} PUBLIC)
 target_include_directories(${SMPT_LIBRARY_NAME}
 	PUBLIC  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
